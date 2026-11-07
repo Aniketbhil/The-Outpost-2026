@@ -91,7 +91,7 @@ export function Header() {
                 {typeof link.count === "number" ? (
                   <Badge
                     variant="outline"
-                    className="h-5 min-w-5 rounded-full border-accent/40 bg-accent/15 px-1.5 text-[11px] font-bold text-foreground"
+                    className="h-5 min-w-5 rounded-full border-accent/40 bg-accent/15 px-1.5 text-xs font-bold text-foreground"
                   >
                     {link.count}
                   </Badge>

@@ -155,7 +155,7 @@ export function DetailActions({
                 remove(scholarship.id);
                 toast.info(`Removed "${scholarship.name}" from tracker.`);
               }}
-              className="text-[11px] text-muted-foreground hover:text-accent hover:underline flex items-center gap-1"
+              className="text-xs text-muted-foreground hover:text-accent hover:underline flex items-center gap-1"
               aria-label="Remove from tracker"
             >
               <Trash2 className="size-3" />

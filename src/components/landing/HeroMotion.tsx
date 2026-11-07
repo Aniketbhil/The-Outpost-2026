@@ -162,7 +162,7 @@ export function HeroMotion() {
               <div className="flex items-center gap-2.5">
                 <div className="size-2.5 rounded-full bg-accent animate-pulse" />
                 <div className="flex flex-col">
-                  <span className="text-[11px] font-medium text-muted-foreground">Match Engine</span>
+                  <span className="text-xs font-medium text-muted-foreground">Match Engine</span>
                   <span className="font-heading text-sm font-bold text-foreground">100% Client-Side</span>
                 </div>
               </div>
@@ -171,7 +171,7 @@ export function HeroMotion() {
             {/* Overlaid secondary metric chip */}
             <div className="absolute -top-2 -right-2 sm:top-4 sm:right-4 rounded-xl border border-border bg-card/95 p-3.5 shadow-card backdrop-blur-md">
               <div className="flex flex-col text-right">
-                <span className="text-[11px] font-medium text-muted-foreground">Applications</span>
+                <span className="text-xs font-medium text-muted-foreground">Applications</span>
                 <span className="font-heading text-sm font-bold text-foreground">Zero Deadlines Missed</span>
               </div>
             </div>

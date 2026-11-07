@@ -19,7 +19,7 @@ export function DetailStickyBottom({ scholarship }: DetailStickyBottomProps) {
           <span className="font-heading text-base font-bold text-foreground leading-tight">
             {formatCurrency(scholarship.amount, scholarship.currency)}
           </span>
-          <span className="text-[11px] text-muted-foreground truncate max-w-[120px]">
+          <span className="text-xs text-muted-foreground truncate max-w-[120px]">
             {scholarship.coverage}
           </span>
         </div>

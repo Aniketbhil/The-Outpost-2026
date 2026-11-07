@@ -219,7 +219,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
           <div className="font-heading text-2xl sm:text-3xl font-bold text-foreground">
             {mounted ? count : "--"}
           </div>
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             Programs in workspace
           </span>
         </div>
@@ -233,7 +233,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
           <div className="font-heading text-2xl sm:text-3xl font-bold text-foreground">
             {mounted ? formatCurrency(Math.round(totalFundingUSD), "USD") : "--"}
           </div>
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             Approx. USD equivalent
           </span>
         </div>
@@ -247,7 +247,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
           <div className="font-heading text-2xl sm:text-3xl font-bold text-foreground">
             {mounted ? submittedCount : "--"}
           </div>
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             Applied or awarded
           </span>
         </div>
@@ -265,7 +265,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                 : `${nextUpcomingItem.days}d left`
               : "No deadline"}
           </div>
-          <span className="text-[11px] text-muted-foreground truncate">
+          <span className="text-xs text-muted-foreground truncate">
             {mounted && nextUpcomingItem
               ? nextUpcomingItem.scholarship.name
               : "All caught up"}
@@ -300,10 +300,10 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
               >
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase font-bold text-accent tracking-wide">
+                    <span className="text-xs uppercase font-bold text-accent tracking-wide">
                       {days < 0 ? "Expired" : days === 0 ? "Due Today" : `Due in ${days} days`}
                     </span>
-                    <span className="text-[10px] text-muted-foreground font-mono">
+                    <span className="text-xs text-muted-foreground font-mono">
                       {formatDate(scholarship.deadline, { month: "short", day: "numeric" })}
                     </span>
                   </div>
@@ -312,7 +312,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                   </h3>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-border pt-2 mt-2 text-[11px] text-muted-foreground">
+                <div className="flex items-center justify-between border-t border-border pt-2 mt-2 text-xs text-muted-foreground">
                   <span className="font-semibold text-foreground">
                     {formatCurrency(scholarship.amount, scholarship.currency)}
                   </span>
@@ -353,7 +353,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                           {colItems.length}
                         </Badge>
                       </h3>
-                      <span className="text-[11px] text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {col.description}
                       </span>
                     </div>
@@ -410,7 +410,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                     >
                       <div className="flex flex-col items-center gap-0.5">
                         <span>{col.label}</span>
-                        <span className="text-[10px] font-bold text-accent">
+                        <span className="text-xs font-bold text-accent">
                           ({colCount})
                         </span>
                       </div>

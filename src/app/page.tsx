@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getClosingSoon, getFeatured, getAggregateStats } from "@/data";
+import { getClosingSoon, getFeatured, getAggregateStats, FAQS } from "@/data";
 import { HeroMotion } from "@/components/landing/HeroMotion";
 import { StatStrip } from "@/components/landing/StatStrip";
 import { HowItWorks } from "@/components/landing/HowItWorks";
-import { LandingFaq } from "@/components/landing/LandingFaq";
 import { ScholarshipCard } from "@/components/scholarship/ScholarshipCard";
+import { LandingFaq } from "@/components/landing/LandingFaq";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -268,7 +268,7 @@ export default function HomePage() {
           </p>
         </div>
 
-        <LandingFaq />
+        <LandingFaq items={FAQS} />
       </section>
 
       {/* 8. Final CTA Band (Accent Fill) */}

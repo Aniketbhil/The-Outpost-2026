@@ -19,12 +19,12 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
               {scholarship.provider}
             </span>
             <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-              <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground">
+              <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                 <Globe className="size-3 text-accent" />
                 <span>{scholarship.country}</span>
               </span>
-              <span className="text-[11px] text-muted-foreground">&bull;</span>
-              <span className="text-[11px] font-medium text-foreground">
+              <span className="text-xs text-muted-foreground">&bull;</span>
+              <span className="text-xs font-medium text-foreground">
                 {scholarship.type}
               </span>
             </div>
@@ -59,7 +59,7 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
         {/* Amount & Coverage */}
         <div className="flex items-baseline justify-between rounded-lg border border-border bg-background/50 p-3">
           <div className="flex flex-col">
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="text-xs uppercase tracking-wider text-muted-foreground">
               Funding Amount
             </span>
             <span className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-foreground">
@@ -79,20 +79,20 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
         <div className="mt-3.5 flex flex-wrap gap-1.5">
           <Badge
             variant="secondary"
-            className="rounded-md bg-secondary text-[11px] font-medium text-secondary-foreground"
+            className="rounded-md bg-secondary text-xs font-medium text-secondary-foreground"
           >
             {scholarship.level}
           </Badge>
           <Badge
             variant="secondary"
-            className="rounded-md bg-secondary text-[11px] font-medium text-secondary-foreground"
+            className="rounded-md bg-secondary text-xs font-medium text-secondary-foreground"
           >
             {scholarship.field}
           </Badge>
           {scholarship.renewable ? (
             <Badge
               variant="outline"
-              className="rounded-md border-border text-[11px] text-muted-foreground"
+              className="rounded-md border-border text-xs text-muted-foreground"
             >
               Renewable
             </Badge>

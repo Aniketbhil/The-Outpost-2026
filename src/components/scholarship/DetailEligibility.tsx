@@ -72,7 +72,7 @@ export function DetailEligibility({ scholarship }: DetailEligibilityProps) {
           </div>
 
           <div className="flex items-center justify-between pt-2 border-t border-accent/20">
-            <span className="text-[11px] text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               Evaluated against your local profile ({profile.educationLevel}, {profile.fieldOfStudy}, {profile.country})
             </span>
             <button

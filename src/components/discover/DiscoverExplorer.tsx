@@ -362,7 +362,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
           }}
           className="w-full py-2"
         />
-        <div className="flex justify-between text-[10px] text-muted-foreground">
+        <div className="flex justify-between text-xs text-muted-foreground">
           <span>$0</span>
           <span>$25k</span>
           <span>$50k+</span>

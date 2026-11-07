@@ -33,11 +33,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const scholarship = getBySlug(slug);
-  if (!scholarship) return { title: "Scholarship Not Found - Grantly" };
+  if (!scholarship) return { title: "Scholarship Not Found" };
 
   return {
-    title: `${scholarship.name} - Grantly`,
+    title: scholarship.name,
     description: scholarship.summary,
+    openGraph: {
+      title: scholarship.name,
+      description: scholarship.summary,
+      type: "article",
+    },
   };
 }
 
@@ -218,7 +223,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
                 <span className="font-heading text-base font-bold text-foreground">
                   {scholarship.type}
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {scholarship.coverage}
                 </span>
               </div>
@@ -230,7 +235,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
                 <span className="font-heading text-base font-bold text-foreground">
                   {scholarship.renewable ? "Renewable Annually" : "One-Time Award"}
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {scholarship.renewable ? "Subject to academic standing" : "Lump sum disbursement"}
                 </span>
               </div>
@@ -242,7 +247,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
                 <span className="font-heading text-base font-bold text-foreground">
                   {scholarship.minGpa !== null ? `${scholarship.minGpa.toFixed(1)} / 4.0` : "No Cutoff"}
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {scholarship.minGpa !== null ? "Cumulative threshold" : "Evaluated holistically"}
                 </span>
               </div>
@@ -254,7 +259,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
                 <span className="font-heading text-base font-bold text-foreground">
                   ~{scholarship.estimatedMinutes} minutes
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   Includes essays &amp; forms
                 </span>
               </div>
@@ -266,7 +271,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
                 <span className="font-heading text-base font-bold text-foreground">
                   {scholarship.country}
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   Citizens or residents
                 </span>
               </div>
@@ -278,7 +283,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
                 <span className="font-heading text-base font-bold text-foreground">
                   {scholarship.field}
                 </span>
-                <span className="text-[11px] text-muted-foreground">
+                <span className="text-xs text-muted-foreground">
                   {scholarship.level} study level
                 </span>
               </div>

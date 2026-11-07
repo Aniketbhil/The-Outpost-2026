@@ -5,7 +5,7 @@ import { DiscoverExplorer } from "@/components/discover/DiscoverExplorer";
 import { DiscoverSkeleton } from "@/components/discover/DiscoverSkeleton";
 
 export const metadata: Metadata = {
-  title: "Discover Scholarships - Grantly",
+  title: "Discover Scholarships",
   description:
     "Explore 30+ verified institutional scholarships with real-time profile matching, custom filter controls, and dead-accurate eligibility criteria.",
 };

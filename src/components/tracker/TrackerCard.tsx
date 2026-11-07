@@ -101,7 +101,7 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
         {/* Top Header: Provider, Status Select, Delete */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[11px] font-semibold text-muted-foreground truncate">
+            <span className="text-xs font-semibold text-muted-foreground truncate">
               {scholarship.provider}
             </span>
             <div className="flex items-center gap-1.5 shrink-0">
@@ -112,7 +112,7 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
                 id={`status-${scholarship.id}`}
                 value={item.status}
                 onChange={handleStatusChange}
-                className="h-8 rounded-md border border-border bg-background px-2 text-[11px] font-semibold text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                className="h-8 rounded-md border border-border bg-background px-2 text-xs font-semibold text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               >
                 {STATUS_OPTIONS.map((opt) => (
                   <option key={opt.value} value={opt.value}>
@@ -146,7 +146,7 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
               </span>
               <Badge
                 variant="outline"
-                className="border-accent/30 bg-accent/10 text-[10px] font-semibold text-foreground"
+                className="border-accent/30 bg-accent/10 text-xs font-semibold text-foreground"
               >
                 {scholarship.coverage}
               </Badge>
@@ -164,18 +164,18 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
 
             {/* Urgency label derived strictly via accent + icon + text */}
             {isPast ? (
-              <span className="text-[11px] font-bold text-muted-foreground flex items-center gap-1">
+              <span className="text-xs font-bold text-muted-foreground flex items-center gap-1">
                 <span>Closed</span>
               </span>
             ) : isUrgent ? (
-              <span className="inline-flex items-center gap-1 rounded border border-accent/40 bg-accent/15 px-1.5 py-0.5 text-[11px] font-bold text-foreground">
+              <span className="inline-flex items-center gap-1 rounded border border-accent/40 bg-accent/15 px-1.5 py-0.5 text-xs font-bold text-foreground">
                 <AlertCircle className="size-3 text-accent" />
                 <span>
                   {daysLeft === 0 ? "Due today!" : `Due in ${daysLeft} days`}
                 </span>
               </span>
             ) : (
-              <span className="text-[11px] font-medium text-muted-foreground">
+              <span className="text-xs font-medium text-muted-foreground">
                 {daysLeft !== null ? `${daysLeft} days left` : ""}
               </span>
             )}
@@ -184,14 +184,14 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
           {/* Document Checklist Summary & Accordion */}
           <div className="flex flex-col gap-2 rounded-lg border border-border bg-muted/20 p-2.5">
             <div className="flex items-center justify-between text-xs font-semibold">
-              <span className="text-foreground flex items-center gap-1.5 text-[11px]">
+              <span className="text-foreground flex items-center gap-1.5 text-xs">
                 <FileCheck2 className="size-3.5 text-accent" />
                 <span>Documents</span>
               </span>
               <button
                 type="button"
                 onClick={() => setChecklistExpanded((prev) => !prev)}
-                className="flex items-center gap-1 text-[11px] text-accent hover:underline"
+                className="flex items-center gap-1 text-xs text-accent hover:underline"
               >
                 <span>
                   {completedDocsCount}/{totalDocsCount} ({docsProgress}%)
@@ -235,7 +235,7 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
           <div className="flex flex-col gap-1">
             <label
               htmlFor={`notes-${scholarship.id}`}
-              className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground"
+              className="text-xs font-bold uppercase tracking-wider text-muted-foreground"
             >
               Application Notes (Autosaved)
             </label>

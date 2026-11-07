@@ -2,6 +2,7 @@ import { SCHOLARSHIPS } from "./scholarships";
 import type { Scholarship } from "@/lib/types";
 
 export { SCHOLARSHIPS };
+export * from "./faq";
 
 export const STATIC_RATES_TO_USD: Record<string, number> = {
   USD: 1.0,

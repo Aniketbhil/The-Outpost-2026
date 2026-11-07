@@ -8,9 +8,43 @@ import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Grantly - Find scholarships that fit you",
+  metadataBase: new URL("https://grantly.app"),
+  title: {
+    default: "Grantly — Scholarship Discovery & Application Tracker",
+    template: "%s | Grantly",
+  },
   description:
-    "Discover, match, and track your scholarship applications with an intuitive, local-first interface.",
+    "Discover merit and need-based scholarships, calculate your personalized match score, and track your application deadlines locally.",
+  keywords: [
+    "scholarships",
+    "grants",
+    "college funding",
+    "financial aid",
+    "application tracker",
+    "student aid",
+  ],
+  authors: [{ name: "Grantly Team" }],
+  creator: "Grantly",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://grantly.app",
+    title: "Grantly — Scholarship Discovery & Application Tracker",
+    description:
+      "Discover merit and need-based scholarships, calculate your personalized match score, and track your application deadlines locally.",
+    siteName: "Grantly",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Grantly — Scholarship Discovery & Application Tracker",
+    description:
+      "Discover merit and need-based scholarships, calculate your personalized match score, and track your application deadlines locally.",
+  },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export const viewport: Viewport = {

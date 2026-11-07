@@ -114,7 +114,7 @@ export function DetailDocuments({ scholarship }: DetailDocumentsProps) {
                 </span>
               </div>
 
-              <span className="text-[11px] text-muted-foreground">
+              <span className="text-xs text-muted-foreground">
                 {isChecked ? "Prepared" : "Pending"}
               </span>
             </label>

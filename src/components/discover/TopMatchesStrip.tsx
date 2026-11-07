@@ -53,7 +53,7 @@ export function TopMatchesStrip({
               <h2 className="font-heading text-lg font-bold text-foreground">
                 Top 3 tailored for you
               </h2>
-              <Badge variant="outline" className="border-accent/40 bg-accent/10 text-[11px] font-semibold text-foreground">
+              <Badge variant="outline" className="border-accent/40 bg-accent/10 text-xs font-semibold text-foreground">
                 Active Match
               </Badge>
             </div>
@@ -83,10 +83,10 @@ export function TopMatchesStrip({
           >
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-medium text-muted-foreground truncate">
+                <span className="text-xs font-medium text-muted-foreground truncate">
                   {scholarship.provider}
                 </span>
-                <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-bold text-foreground">
+                <span className="inline-flex items-center gap-1 rounded-full bg-accent/15 px-2 py-0.5 text-xs font-bold text-foreground">
                   <Award className="size-2.5 text-accent" />
                   {match.score}% fit
                 </span>
@@ -100,7 +100,7 @@ export function TopMatchesStrip({
               <span className="text-xs font-bold text-foreground">
                 {formatCurrency(scholarship.amount, scholarship.currency)}
               </span>
-              <span className="inline-flex items-center text-[11px] font-semibold text-accent gap-0.5 group-hover:translate-x-0.5 transition-transform">
+              <span className="inline-flex items-center text-xs font-semibold text-accent gap-0.5 group-hover:translate-x-0.5 transition-transform">
                 View <ArrowRight className="size-3" />
               </span>
             </div>

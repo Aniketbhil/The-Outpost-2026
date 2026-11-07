@@ -4,7 +4,7 @@ import { getAll } from "@/data";
 import { TrackerSkeleton } from "@/components/tracker/TrackerSkeleton";
 
 export const metadata: Metadata = {
-  title: "My Tracker - Grantly",
+  title: "My Tracker",
   description:
     "Track your saved scholarships, assemble document checklists, monitor deadlines, and record application notes locally in your browser.",
 };
