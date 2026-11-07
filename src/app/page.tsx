@@ -1,147 +1,313 @@
 import type { Metadata } from "next";
-import { DemoActions } from "@/components/demo-actions";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { CheckCircle2, ShieldCheck, Compass, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { getClosingSoon, getFeatured, getAggregateStats } from "@/data";
+import { HeroMotion } from "@/components/landing/HeroMotion";
+import { StatStrip } from "@/components/landing/StatStrip";
+import { HowItWorks } from "@/components/landing/HowItWorks";
+import { LandingFaq } from "@/components/landing/LandingFaq";
+import { ScholarshipCard } from "@/components/scholarship/ScholarshipCard";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+  ArrowRight,
+  Clock,
+  Sparkles,
+  AlertCircle,
+  CheckCircle2,
+  BookmarkCheck,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Grantly - Find scholarships that fit you",
   description:
-    "Discover, match, and track your scholarship applications with an intuitive, local-first interface.",
+    "Discover verified scholarships, match your academic profile, and track application deadlines with zero accounts or tracking.",
 };
 
 export default function HomePage() {
+  const stats = getAggregateStats();
+  const closingSoonScholarships = getClosingSoon(6);
+  const featuredScholarships = getFeatured();
+
+  const comparisonRows = [
+    {
+      problem: "Scattered Aggregators & Dead Links",
+      problemDetail:
+        "Students waste 30+ hours trawling unverified portals with broken URLs, expired programs, and sponsored spam entries.",
+      solution: "Verified Single-Source Directory",
+      solutionDetail:
+        "30+ hand-curated scholarship records with confirmed dates, direct provider application portals, and clear award terms.",
+    },
+    {
+      problem: "Ambiguous Eligibility & Disqualification",
+      problemDetail:
+        "Applying blindly to programs only to be rejected over fine-print GPA formulas, residency clauses, or study-level restrictions.",
+      solution: "Deterministic Fit Scoring",
+      solutionDetail:
+        "Instant 0–100% profile matching breaking down degree level, field, country, GPA, and financial need with transparent reasons.",
+    },
+    {
+      problem: "Missed Deadlines & Lost Document Checklists",
+      problemDetail:
+        "Tracking essays, transcripts, and recommendation letters across scattered spreadsheets and browser tabs leads to missed cutoffs.",
+      solution: "Local-First Application Kanban",
+      solutionDetail:
+        "In-browser stage tracking from Saved to Applied, with dedicated document checklists and real-time deadline counters.",
+    },
+  ];
+
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-16 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      {/* Hero Section */}
-      <section className="flex flex-col items-start gap-6 max-w-3xl">
-        <Badge
-          variant="outline"
-          className="gap-1.5 border-accent/40 bg-accent/10 px-3 py-1 text-xs font-semibold text-foreground"
-        >
-          <Sparkles className="size-3.5 text-accent" />
-          <span>Foundation Ready &bull; 3-Color Strict Token System</span>
-        </Badge>
-
-        <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
-          Find scholarships that fit you<span className="text-accent">.</span>
-        </h1>
-
-        <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
-          Grantly is a streamlined, privacy-first scholarship discovery and application tracking workspace.
-          Zero accounts, zero tracking databases, 100% local in your browser.
-        </p>
+    <div className="flex flex-col gap-20 py-8 sm:gap-28 sm:py-12 lg:py-16">
+      {/* 1. Hero Section */}
+      <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <HeroMotion />
       </section>
 
-      {/* Interactive Verification Leaf */}
-      <section aria-labelledby="verifier-heading">
-        <h2 id="verifier-heading" className="sr-only">
-          Store &amp; Token Verifier
-        </h2>
-        <DemoActions />
+      {/* 2. Stat Strip Section */}
+      <section
+        className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-label="Overview Statistics"
+      >
+        <StatStrip
+          count={stats.count}
+          totalFundingUSD={stats.totalFundingUSD}
+          closingThisMonth={stats.closingThisMonth}
+        />
       </section>
 
-      {/* Token Verification Grid: 3 Colors & Typography */}
-      <section className="flex flex-col gap-8" aria-labelledby="tokens-heading">
-        <div className="flex flex-col gap-2">
-          <h2 id="tokens-heading" className="font-heading text-2xl sm:text-3xl font-bold text-foreground">
-            Token System &amp; Visual Spec
+      {/* 3. How It Works Section */}
+      <section
+        className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-labelledby="how-it-works-heading"
+      >
+        <div className="flex flex-col items-center gap-3 text-center mb-12">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-semibold text-foreground">
+            <Sparkles className="size-3.5 text-accent" />
+            <span>Structured Process</span>
+          </div>
+          <h2
+            id="how-it-works-heading"
+            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground"
+          >
+            How Grantly works<span className="text-accent">.</span>
           </h2>
-          <p className="text-sm text-muted-foreground">
-            Strictly 3 colors across light &amp; dark themes, derived shades via color-mix(), and two curated typefaces.
+          <p className="max-w-xl text-base text-muted-foreground">
+            A three-step workflow designed to take you from discovery to complete submission without cognitive overload.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Palette Card */}
-          <Card className="border-border bg-card">
-            <CardHeader>
-              <CardTitle className="font-heading text-xl text-foreground">
-                3-Color System
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Strict single-hue hierarchy
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-3">
-              <div className="flex items-center justify-between rounded-lg border border-border bg-background p-3">
-                <span className="text-sm font-medium text-foreground">1. Background</span>
-                <span className="text-xs text-muted-foreground font-mono">#F8F9FA / #121214</span>
-              </div>
-              <div className="flex items-center justify-between rounded-lg border border-border bg-primary text-primary-foreground p-3">
-                <span className="text-sm font-medium">2. Primary</span>
-                <span className="text-xs opacity-80 font-mono">#18181B / #ECECEF</span>
-              </div>
-              <div className="flex items-center justify-between rounded-lg border border-accent bg-accent text-accent-foreground p-3">
-                <span className="text-sm font-semibold">3. Accent</span>
-                <span className="text-xs opacity-90 font-mono">#E76F51 / #F08A6D</span>
-              </div>
-            </CardContent>
-          </Card>
+        <HowItWorks />
+      </section>
 
-          {/* Typography Card */}
-          <Card className="border-border bg-card">
-            <CardHeader>
-              <CardTitle className="font-heading text-xl text-foreground">
-                Type Scale
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Fraunces (Headings) + DM Sans (Body)
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-2.5">
-              <div className="font-heading text-2xl font-bold text-foreground">
-                Fraunces Heading 2xl
-              </div>
-              <div className="font-heading text-xl font-semibold text-foreground">
-                Fraunces Heading xl
-              </div>
-              <div className="text-base text-foreground">
-                DM Sans Body Regular (16px / 1.5)
-              </div>
-              <div className="text-sm text-muted-foreground">
-                DM Sans Caption &amp; Meta (14px)
-              </div>
-              <div className="text-xs text-muted-foreground">
-                DM Sans Micro Labels &amp; Badges (12px)
-              </div>
-            </CardContent>
-          </Card>
+      {/* 4. Closing Soon Section */}
+      <section
+        className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-labelledby="closing-soon-heading"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div className="flex flex-col gap-2">
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
+              <Clock className="size-3.5" />
+              <span>Upcoming Deadlines</span>
+            </div>
+            <h2
+              id="closing-soon-heading"
+              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground"
+            >
+              Closing soon
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Prioritize your application timeline with funding programs ending in the coming weeks.
+            </p>
+          </div>
 
-          {/* Status System Card */}
-          <Card className="border-border bg-card">
-            <CardHeader>
-              <CardTitle className="font-heading text-xl text-foreground">
-                Accent Status Paradigm
-              </CardTitle>
-              <CardDescription className="text-muted-foreground">
-                Status conveyed via accent + icon + text
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-2.5">
-              <div className="flex items-center justify-between rounded-md border border-border p-2">
-                <div className="flex items-center gap-2 text-sm text-foreground">
+          <Link
+            href="/discover?sort=deadline-soonest"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "min-h-[44px] self-start sm:self-auto gap-2 border-border text-foreground hover:bg-muted"
+            )}
+          >
+            <span>View all closing soon</span>
+            <ArrowRight className="size-4 text-accent" />
+          </Link>
+        </div>
+
+        {/* Snap-scroll list on mobile / Grid on desktop */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:overflow-visible">
+          {closingSoonScholarships.map((scholarship) => (
+            <div
+              key={scholarship.id}
+              className="w-[85vw] max-w-sm shrink-0 snap-center md:w-auto"
+            >
+              <ScholarshipCard scholarship={scholarship} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Featured Scholarships Section */}
+      <section
+        className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-labelledby="featured-heading"
+      >
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div className="flex flex-col gap-2">
+            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
+              <Sparkles className="size-3.5" />
+              <span>High Impact Awards</span>
+            </div>
+            <h2
+              id="featured-heading"
+              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground"
+            >
+              Featured scholarships
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Flagship fellowships, full rides, and competitive research bursaries curated for high impact.
+            </p>
+          </div>
+
+          <Link
+            href="/discover"
+            className={cn(
+              buttonVariants({ variant: "outline" }),
+              "min-h-[44px] self-start sm:self-auto gap-2 border-border text-foreground hover:bg-muted"
+            )}
+          >
+            <span>Explore all scholarships</span>
+            <ArrowRight className="size-4 text-accent" />
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {featuredScholarships.map((scholarship) => (
+            <ScholarshipCard key={scholarship.id} scholarship={scholarship} />
+          ))}
+        </div>
+      </section>
+
+      {/* 6. Why Students Lose Out (Problem -> Solution) */}
+      <section
+        className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-labelledby="why-lose-out-heading"
+      >
+        <div className="flex flex-col items-center gap-3 text-center mb-12">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 px-3 py-1 text-xs font-semibold text-foreground">
+            <AlertCircle className="size-3.5 text-accent" />
+            <span>The Reality of Funding</span>
+          </div>
+          <h2
+            id="why-lose-out-heading"
+            className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+          >
+            Why students lose out &bull; How Grantly fixes it
+          </h2>
+          <p className="max-w-xl text-base text-muted-foreground">
+            Every year, billions in scholarship funding go unclaimed due to fragmented information and organizational barriers.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          {comparisonRows.map((row, index) => (
+            <div
+              key={row.problem}
+              className="grid grid-cols-1 divide-y divide-border rounded-2xl border border-border bg-card shadow-card lg:grid-cols-2 lg:divide-x lg:divide-y-0"
+            >
+              {/* Problem Column */}
+              <div className="flex flex-col gap-2 p-6 sm:p-8">
+                <div className="flex items-center gap-2">
+                  <div className="flex size-6 items-center justify-center rounded-full border border-border bg-muted text-xs font-bold text-muted-foreground">
+                    {index + 1}
+                  </div>
+                  <span className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                    The Problem
+                  </span>
+                </div>
+                <h3 className="font-heading text-lg font-bold text-foreground">
+                  {row.problem}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {row.problemDetail}
+                </p>
+              </div>
+
+              {/* Solution Column */}
+              <div className="flex flex-col gap-2 p-6 sm:p-8 bg-muted/20">
+                <div className="flex items-center gap-2">
                   <CheckCircle2 className="size-4 text-accent" />
-                  <span>Preparing</span>
+                  <span className="text-xs uppercase tracking-wider text-accent font-semibold">
+                    How Grantly Fixes It
+                  </span>
                 </div>
-                <Badge variant="outline" className="border-accent/30 text-accent">Active</Badge>
+                <h3 className="font-heading text-lg font-bold text-foreground">
+                  {row.solution}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {row.solutionDetail}
+                </p>
               </div>
-              <div className="flex items-center justify-between rounded-md border border-border p-2">
-                <div className="flex items-center gap-2 text-sm text-foreground">
-                  <ShieldCheck className="size-4 text-accent" />
-                  <span>Applied</span>
-                </div>
-                <Badge variant="outline" className="border-accent/30 text-accent">Submitted</Badge>
-              </div>
-              <div className="flex items-center justify-between rounded-md border border-border p-2">
-                <div className="flex items-center gap-2 text-sm text-foreground">
-                  <Compass className="size-4 text-accent" />
-                  <span>Awarded</span>
-                </div>
-                <Badge variant="outline" className="border-accent/30 text-accent">Success</Badge>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 7. FAQ Section */}
+      <section
+        className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8"
+        aria-labelledby="faq-heading"
+      >
+        <div className="flex flex-col items-center gap-3 text-center mb-8">
+          <h2
+            id="faq-heading"
+            className="font-heading text-3xl sm:text-4xl font-bold tracking-tight text-foreground"
+          >
+            Frequently asked questions
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground">
+            Clear, transparent answers on how Grantly protects your privacy and simplifies your search.
+          </p>
+        </div>
+
+        <LandingFaq />
+      </section>
+
+      {/* 8. Final CTA Band (Accent Fill) */}
+      <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative overflow-hidden rounded-3xl bg-accent p-8 sm:p-14 text-center text-accent-foreground shadow-card flex flex-col items-center gap-6">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent-foreground/20 bg-accent-foreground/10 px-3.5 py-1 text-xs font-semibold text-accent-foreground">
+            <BookmarkCheck className="size-4" />
+            <span>Ready for your next application cycle</span>
+          </div>
+
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-accent-foreground max-w-2xl leading-[1.15]">
+            Start discovering scholarships tailored to your exact profile.
+          </h2>
+
+          <p className="text-base sm:text-lg text-accent-foreground/90 max-w-xl leading-relaxed">
+            No signup barriers, no advertisements. Save opportunities, check off your application requirements, and never miss a deadline.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+            <Link
+              href="/discover"
+              className={cn(
+                buttonVariants({ variant: "default" }),
+                "min-h-[48px] rounded-xl bg-primary px-8 text-base font-semibold text-primary-foreground transition-all hover:bg-primary/90 focus-visible:ring-2 focus-visible:ring-ring"
+              )}
+            >
+              <span>Explore 30+ Scholarships</span>
+              <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              href="/tracker"
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "min-h-[48px] rounded-xl border-accent-foreground/30 bg-transparent px-6 text-base font-semibold text-accent-foreground hover:bg-accent-foreground/10"
+              )}
+            >
+              <span>Open Application Tracker</span>
+            </Link>
+          </div>
         </div>
       </section>
     </div>

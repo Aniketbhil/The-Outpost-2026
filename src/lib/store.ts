@@ -76,9 +76,12 @@ export const DEFAULT_STATE: TrackerStoreState = {
 
 export const DEFAULT_FILTERS: ScholarshipFilters = {
   search: "",
-  educationLevels: [],
-  fieldsOfStudy: [],
+  levels: [],
+  fields: [],
+  countries: [],
   currencies: [],
+  types: [],
+  coverages: [],
   minAmount: 0,
   maxAmount: 50000,
   onlyEligible: false,
