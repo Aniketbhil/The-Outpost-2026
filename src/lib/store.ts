@@ -62,9 +62,23 @@ export const DEMO_TRACKED_ITEMS: Record<string, TrackedItem> = {
       "Acceptance Agreement": true,
       "Direct Deposit Verification": true,
     },
-    notes: "Award confirmation received! $10,000 disbursed directly to university account.",
+    notes: "Award confirmation received! Disbursed directly to university account.",
     addedAt: "2026-09-01T12:00:00.000Z",
     updatedAt: "2026-10-28T11:00:00.000Z",
+  },
+  "sch-5": {
+    scholarshipId: "sch-5",
+    status: "preparing",
+    checklist: {
+      "High School and College Transcripts": true,
+      "FAFSA / Student Aid Index (SAI) documentation": true,
+      "Two Personal Insight Essays (500 words each)": false,
+      "One Academic STEM Teacher Recommendation": false,
+      "One Community or Leadership Reference": true,
+    },
+    notes: "Drafting the personal insight essays. Advisor recommended emphasizing first-generation STEM background.",
+    addedAt: "2026-10-20T11:00:00.000Z",
+    updatedAt: "2026-11-04T09:30:00.000Z",
   },
 };
 
