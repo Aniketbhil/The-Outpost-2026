@@ -8,7 +8,7 @@ Grantly is an accessible, privacy-first scholarship discovery and application tr
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Live Demo: [https://grantly.app](https://grantly.app)
+Live Demo: [https://gradly-umber.vercel.app/](https://gradly-umber.vercel.app/)
 
 ---
 

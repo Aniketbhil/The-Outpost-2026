@@ -42,6 +42,7 @@ import { toast } from "sonner";
 
 interface TrackerBoardProps {
   scholarships: Scholarship[];
+  hideHeader?: boolean;
 }
 
 const COLUMNS: {
@@ -76,7 +77,7 @@ const COLUMNS: {
   },
 ];
 
-export function TrackerBoard({ scholarships }: TrackerBoardProps) {
+export function TrackerBoard({ scholarships, hideHeader = false }: TrackerBoardProps) {
   const mounted = useIsMounted();
   const { tracked, count, loadDemo, reset } = useTracker();
   const [resetDialogOpen, setResetDialogOpen] = React.useState(false);
@@ -151,62 +152,74 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
   return (
     <div className="flex flex-col gap-8">
       {/* Top Action Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border pb-6">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-2">
-            <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-              My Application Tracker
-            </h1>
-            <Badge
-              variant="outline"
-              className="border-accent/40 bg-accent/10 px-2.5 py-0.5 text-xs font-bold text-foreground"
-            >
-              {mounted ? `${count} tracked` : "Loading..."}
-            </Badge>
+      {!hideHeader && (
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border pb-6">
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center gap-2">
+              <h1 className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+                My Application Tracker
+              </h1>
+              <Badge
+                variant="outline"
+                className="border-accent/40 bg-accent/10 px-2.5 py-0.5 text-xs font-bold text-foreground"
+              >
+                {mounted ? `${count} tracked` : "Loading..."}
+              </Badge>
+            </div>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Manage your saved programs, document preparation checklists, notes, and deadlines.
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-muted-foreground">
-            Manage your saved programs, document preparation checklists, notes, and deadlines.
-          </p>
-        </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <Link
-            href="/discover"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "sm" }),
-              "min-h-[40px] gap-1.5 border-border text-xs font-semibold text-foreground hover:bg-muted"
-            )}
-          >
-            <Compass className="size-3.5 text-accent" />
-            <span>Browse Directory</span>
-          </Link>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              aria-label="Tracker options"
-              className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-card text-foreground hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+          <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
+            <Link
+              href="/discover"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "min-h-[40px] gap-1.5 border-border text-xs font-semibold text-foreground hover:bg-muted"
+              )}
             >
-              <MoreVertical className="size-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48 border-border bg-card">
-              <DropdownMenuItem
-                onClick={handleLoadDemo}
-                className="gap-2 text-xs font-medium cursor-pointer"
+              <Compass className="size-3.5 text-accent" />
+              <span>Browse Directory</span>
+            </Link>
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleLoadDemo}
+              className="min-h-[40px] gap-1.5 border-border bg-card text-xs font-semibold text-foreground hover:bg-muted"
+            >
+              <Sparkles className="size-3.5 text-accent" />
+              <span>Load Demo Data</span>
+            </Button>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                aria-label="Tracker options"
+                className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-card text-foreground hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
               >
-                <Sparkles className="size-3.5 text-accent" />
-                <span>Load Demo Dataset (5)</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => setResetDialogOpen(true)}
-                className="gap-2 text-xs font-medium text-accent cursor-pointer"
-              >
-                <RotateCcw className="size-3.5 text-accent" />
-                <span>Reset All Tracked</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                <MoreVertical className="size-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 border-border bg-card">
+                <DropdownMenuItem
+                  onClick={handleLoadDemo}
+                  className="gap-2 text-xs font-medium cursor-pointer"
+                >
+                  <Sparkles className="size-3.5 text-accent" />
+                  <span>Load Demo Dataset (5)</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => setResetDialogOpen(true)}
+                  className="gap-2 text-xs font-medium text-accent cursor-pointer"
+                >
+                  <RotateCcw className="size-3.5 text-accent" />
+                  <span>Reset All Tracked</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 1. Summary Metrics Strip */}
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
@@ -375,7 +388,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                         <m.div
                           key={item.scholarshipId}
                           layout
-                          initial={{ opacity: 0, scale: 0.96 }}
+                          initial={false}
                           animate={{ opacity: 1, scale: 1 }}
                           exit={{ opacity: 0, scale: 0.96 }}
                           transition={{ duration: 0.2 }}
@@ -525,5 +538,88 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
         </DialogContent>
       </Dialog>
     </div>
+  );
+}
+
+export function TrackerHeaderActions() {
+  const { loadDemo, reset } = useTracker();
+  const [resetDialogOpen, setResetDialogOpen] = React.useState(false);
+
+  const handleLoadDemo = () => {
+    loadDemo();
+    toast.success("Loaded 5 realistic demo scholarship applications into your tracker!");
+  };
+
+  const handleResetConfirm = () => {
+    reset();
+    setResetDialogOpen(false);
+    toast.info("Application tracker has been reset to empty.");
+  };
+
+  return (
+    <>
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={handleLoadDemo}
+        className="min-h-[40px] gap-1.5 border-border bg-card text-xs font-semibold text-foreground hover:bg-muted"
+      >
+        <Sparkles className="size-3.5 text-accent" />
+        <span>Load Demo Data</span>
+      </Button>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          aria-label="Tracker options"
+          className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-card text-foreground hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <MoreVertical className="size-4" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-48 border-border bg-card">
+          <DropdownMenuItem
+            onClick={handleLoadDemo}
+            className="gap-2 text-xs font-medium cursor-pointer"
+          >
+            <Sparkles className="size-3.5 text-accent" />
+            <span>Load Demo Dataset (5)</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => setResetDialogOpen(true)}
+            className="gap-2 text-xs font-medium text-accent cursor-pointer"
+          >
+            <RotateCcw className="size-3.5 text-accent" />
+            <span>Reset All Tracked</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <Dialog open={resetDialogOpen} onOpenChange={setResetDialogOpen}>
+        <DialogContent className="max-w-md border-border bg-card p-6">
+          <DialogHeader className="flex flex-col gap-2">
+            <DialogTitle className="font-heading text-lg font-bold text-foreground">
+              Reset Application Tracker?
+            </DialogTitle>
+            <DialogDescription className="text-sm text-muted-foreground leading-relaxed">
+              This action will delete all tracked scholarships, document checklists, and personal notes stored in your browser. This cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex items-center justify-end gap-2 pt-4">
+            <Button
+              variant="outline"
+              onClick={() => setResetDialogOpen(false)}
+              className="min-h-[44px] border-border text-foreground hover:bg-muted"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleResetConfirm}
+              className="min-h-[44px] bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Yes, Reset Tracker
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

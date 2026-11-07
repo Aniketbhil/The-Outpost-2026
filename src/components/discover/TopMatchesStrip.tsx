@@ -24,7 +24,37 @@ export function TopMatchesStrip({
   const { profile } = useProfile();
 
   if (!mounted || !profile || !profile.fieldOfStudy) {
-    return null;
+    return (
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-2xl border border-accent/40 bg-card p-5 sm:p-6 shadow-sm">
+        <div className="flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-accent/15 text-accent shrink-0">
+            <Sparkles className="size-5" />
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <div className="flex items-center gap-2">
+              <h2 className="font-heading text-base sm:text-lg font-bold text-foreground">
+                Get your personalized match score
+              </h2>
+              <Badge variant="outline" className="border-accent/40 bg-accent/10 text-xs font-semibold text-foreground">
+                0–100% Fit
+              </Badge>
+            </div>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Answer 4 quick questions (education level, study field, nationality, GPA) to calculate instant eligibility ratings across all 30 scholarships.
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={onEditProfile}
+          className="inline-flex min-h-[44px] shrink-0 items-center justify-center gap-2 rounded-xl bg-accent px-5 text-xs font-bold text-accent-foreground hover:bg-accent/90 transition-colors shadow-sm self-start sm:self-auto cursor-pointer"
+        >
+          <Sparkles className="size-4" />
+          <span>Get Your Match Score</span>
+        </button>
+      </div>
+    );
   }
 
   // Calculate top 3 matching scholarships

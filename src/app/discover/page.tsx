@@ -25,8 +25,8 @@ export default function DiscoverPage() {
         </p>
       </div>
 
-      {/* Interactive Explorer wrapped in Suspense with Skeleton Fallback */}
-      <Suspense fallback={<DiscoverSkeleton />}>
+      {/* Interactive Explorer wrapped in Suspense with Real Server-Rendered Grid Fallback */}
+      <Suspense fallback={<DiscoverSkeleton scholarships={scholarships.slice(0, 12)} />}>
         <DiscoverExplorer scholarships={scholarships} />
       </Suspense>
     </div>

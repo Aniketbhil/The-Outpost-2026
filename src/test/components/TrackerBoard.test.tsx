@@ -17,10 +17,10 @@ describe("TrackerBoard Component", () => {
 
     expect(screen.getByText(/Your application tracker is empty/i)).toBeInTheDocument();
 
-    const loadDemoBtn = screen.getByRole("button", { name: /Load demo data/i });
-    expect(loadDemoBtn).toBeInTheDocument();
+    const loadDemoBtns = screen.getAllByRole("button", { name: /Load demo/i });
+    expect(loadDemoBtns.length).toBeGreaterThan(0);
 
-    fireEvent.click(loadDemoBtn);
+    fireEvent.click(loadDemoBtns[0]);
 
     // After loading demo data, summary row and columns appear
     expect(screen.getByText(/Total Tracked/i)).toBeInTheDocument();

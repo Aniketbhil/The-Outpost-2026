@@ -17,10 +17,10 @@ export function StatStrip({
   const [inView, setInView] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
-  // Animated values
-  const [displayCount, setDisplayCount] = React.useState(0);
-  const [displayFunding, setDisplayFunding] = React.useState(0);
-  const [displayClosing, setDisplayClosing] = React.useState(0);
+  // Final values rendered by default so server HTML has real numbers
+  const [displayCount, setDisplayCount] = React.useState(count);
+  const [displayFunding, setDisplayFunding] = React.useState(totalFundingUSD);
+  const [displayClosing, setDisplayClosing] = React.useState(closingThisMonth);
 
   React.useEffect(() => {
     const el = containerRef.current;

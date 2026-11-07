@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export function HeroMotion() {
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
@@ -18,7 +18,7 @@ export function HeroMotion() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 14 },
+    hidden: { opacity: 1, y: 0 },
     visible: {
       opacity: 1,
       y: 0,
@@ -33,7 +33,7 @@ export function HeroMotion() {
         <m.div
           className="flex flex-col items-start gap-6 lg:col-span-7"
           variants={containerVariants}
-          initial="hidden"
+          initial={false}
           animate="visible"
         >
           {/* Eyebrow badge */}

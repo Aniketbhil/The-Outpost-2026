@@ -15,6 +15,8 @@ import {
   AlertCircle,
   CheckCircle2,
   BookmarkCheck,
+  Compass,
+  FileCheck,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -64,7 +66,86 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. Stat Strip Section */}
+      {/* 2. Problem Alignment: How Grantly Solves the Brief */}
+      <section
+        className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
+        aria-labelledby="brief-alignment-heading"
+      >
+        <div className="flex flex-col gap-6 rounded-3xl border border-border bg-card/60 p-6 sm:p-10 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-border/80 pb-5">
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-accent/15 px-2.5 py-0.5 text-xs font-bold text-foreground">
+                  The Hackathon Brief
+                </span>
+                <span className="text-xs font-medium text-muted-foreground">
+                  Rethinking the Scholarship Experience
+                </span>
+              </div>
+              <h2
+                id="brief-alignment-heading"
+                className="font-heading text-2xl sm:text-3xl font-bold tracking-tight text-foreground"
+              >
+                Four Core Pillars Built for Students
+              </h2>
+            </div>
+            <Link
+              href="/discover"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "min-h-[40px] gap-1.5 border-border text-xs font-semibold text-foreground hover:bg-muted self-start sm:self-auto"
+              )}
+            >
+              <span>Explore Directory</span>
+              <ArrowRight className="size-3.5 text-accent" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <Compass className="size-4 text-accent shrink-0" />
+                <h3 className="font-heading text-base font-bold">1. Discover</h3>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Single-source directory of 30+ verified institutional awards across India, USA, UK, Germany, and Global with no dead links.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <Sparkles className="size-4 text-accent shrink-0" />
+                <h3 className="font-heading text-base font-bold">2. Eligibility</h3>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Deterministic 5-factor fit score comparing your education level, discipline, country, and GPA with transparent met criteria.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <FileCheck className="size-4 text-accent shrink-0" />
+                <h3 className="font-heading text-base font-bold">3. Navigate Steps</h3>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Dedicated application timelines, document readiness checklists, and effort estimates for every single scholarship program.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex items-center gap-2 text-foreground font-semibold">
+                <BookmarkCheck className="size-4 text-accent shrink-0" />
+                <h3 className="font-heading text-base font-bold">4. Track Deadlines</h3>
+              </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Local-first 4-column Kanban board with countdown alarms, checklist sync, and custom notes that persist securely in your browser.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Stat Strip Section */}
       <section
         className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8"
         aria-label="Overview Statistics"

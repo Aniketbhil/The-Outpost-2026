@@ -29,7 +29,7 @@ const steps = [
 
 export function HowItWorks() {
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
@@ -39,7 +39,7 @@ export function HowItWorks() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 16 },
+    hidden: { opacity: 1, y: 0 },
     visible: {
       opacity: 1,
       y: 0,
@@ -52,9 +52,8 @@ export function HowItWorks() {
       <m.div
         className="grid grid-cols-1 gap-6 md:grid-cols-3"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        initial={false}
+        animate="visible"
       >
         {steps.map((item, idx) => {
           const Icon = item.icon;

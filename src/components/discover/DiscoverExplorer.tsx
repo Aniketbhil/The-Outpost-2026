@@ -690,10 +690,10 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
               <LazyMotion features={domAnimation}>
                 <m.div
                   className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
-                  initial="hidden"
+                  initial={false}
                   animate="visible"
                   variants={{
-                    hidden: { opacity: 0 },
+                    hidden: { opacity: 1 },
                     visible: {
                       opacity: 1,
                       transition: { staggerChildren: 0.05 },
@@ -704,7 +704,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
                     <m.div
                       key={scholarship.id}
                       variants={{
-                        hidden: { opacity: 0, y: 10 },
+                        hidden: { opacity: 1, y: 0 },
                         visible: { opacity: 1, y: 0 },
                       }}
                     >
