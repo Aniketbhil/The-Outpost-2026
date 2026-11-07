@@ -11,29 +11,29 @@ describe("LocalStorage Store & State Manager", () => {
     store.addTracked("sch-100", "saved");
     const snapshot = store.getSnapshot();
     expect(snapshot.tracked["sch-100"]).toBeDefined();
-    expect(snapshot.tracked["sch-100"].status).toBe("saved");
+    expect(snapshot.tracked["sch-100"]?.status).toBe("saved");
   });
 
   it("updates status of a tracked scholarship", () => {
     store.addTracked("sch-101", "saved");
     store.setStatus("sch-101", "preparing");
-    expect(store.getSnapshot().tracked["sch-101"].status).toBe("preparing");
+    expect(store.getSnapshot().tracked["sch-101"]?.status).toBe("preparing");
   });
 
   it("toggles document checklist items", () => {
     store.addTracked("sch-102", "preparing");
     store.toggleDoc("sch-102", "Transcript");
-    expect(store.getSnapshot().tracked["sch-102"].checklist["Transcript"]).toBe(true);
+    expect(store.getSnapshot().tracked["sch-102"]?.checklist["Transcript"]).toBe(true);
 
     store.toggleDoc("sch-102", "Transcript");
-    expect(store.getSnapshot().tracked["sch-102"].checklist["Transcript"]).toBe(false);
+    expect(store.getSnapshot().tracked["sch-102"]?.checklist["Transcript"]).toBe(false);
   });
 
   it("sets application notes with automatic length limiting", () => {
     store.addTracked("sch-103", "preparing");
     const longNotes = "a".repeat(6000);
     store.setNotes("sch-103", longNotes);
-    expect(store.getSnapshot().tracked["sch-103"].notes.length).toBe(5000);
+    expect(store.getSnapshot().tracked["sch-103"]?.notes.length).toBe(5000);
   });
 
   it("removes a tracked scholarship", () => {

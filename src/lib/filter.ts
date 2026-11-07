@@ -15,6 +15,10 @@ export interface FilterParams {
   sort?: "match" | "deadline-soonest" | "amount-high" | "easiest";
 }
 
+function assertNever(x: never): never {
+  throw new Error(`Unhandled sort option: ${JSON.stringify(x)}`);
+}
+
 /**
  * Normalizes amount to USD for cross-currency comparisons
  */
@@ -128,28 +132,27 @@ export function filterAndSortScholarships(
     return true;
   });
 
-  // Sorting
+  // Sorting (exhaustive switch with never check)
   const sorted = [...filtered].sort((a, b) => {
-    if (sort === "match") {
-      const scoreA = profile ? scoreMatch(a, profile).score : a.featured ? 100 : 50;
-      const scoreB = profile ? scoreMatch(b, profile).score : b.featured ? 100 : 50;
-      if (scoreB !== scoreA) {
-        return scoreB - scoreA;
+    switch (sort) {
+      case "match": {
+        const scoreA = profile ? scoreMatch(a, profile).score : a.featured ? 100 : 50;
+        const scoreB = profile ? scoreMatch(b, profile).score : b.featured ? 100 : 50;
+        if (scoreB !== scoreA) {
+          return scoreB - scoreA;
+        }
+        // secondary sort by deadline
+        return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
       }
-      // secondary sort by deadline
-      return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+      case "amount-high":
+        return getAmountInUSD(b) - getAmountInUSD(a);
+      case "easiest":
+        return a.estimatedMinutes - b.estimatedMinutes;
+      case "deadline-soonest":
+        return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+      default:
+        return assertNever(sort);
     }
-
-    if (sort === "amount-high") {
-      return getAmountInUSD(b) - getAmountInUSD(a);
-    }
-
-    if (sort === "easiest") {
-      return a.estimatedMinutes - b.estimatedMinutes;
-    }
-
-    // default: "deadline-soonest"
-    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
   });
 
   return {

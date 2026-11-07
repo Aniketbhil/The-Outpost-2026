@@ -49,7 +49,7 @@ describe("URL Params Parser & Security Validator", () => {
       page: "-10",
     };
 
-    const parsed = parseSearchParams(maliciousParams as unknown as Record<string, string[]>);
+    const parsed = parseSearchParams(maliciousParams);
     expect(parsed.level).toEqual(["Undergraduate"]);
     expect(parsed.field).toEqual(["STEM"]);
     expect(parsed.country).toEqual([]);

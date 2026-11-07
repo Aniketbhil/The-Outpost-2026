@@ -20,9 +20,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Grantly - Find scholarships that fit you",
+  title: "Grantly: Rethinking the Scholarship Experience",
   description:
-    "Discover verified scholarships, match your academic profile, and track application deadlines with zero accounts or tracking.",
+    "Make discovering and managing educational financial assistance simpler, more intuitive, and accessible with verified awards, deterministic eligibility fit scoring, and local-first application tracking.",
 };
 
 export default function HomePage() {
@@ -102,44 +102,80 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
-              <div className="flex items-center gap-2 text-foreground font-semibold">
-                <Compass className="size-4 text-accent shrink-0" />
-                <h3 className="font-heading text-base font-bold">1. Discover</h3>
+            <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-foreground font-semibold">
+                  <Compass className="size-4 text-accent shrink-0" />
+                  <h3 className="font-heading text-base font-bold">1. Discover</h3>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Single-source directory of 30+ verified institutional awards across India, USA, UK, Germany, and Global with no dead links.
+                </p>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Single-source directory of 30+ verified institutional awards across India, USA, UK, Germany, and Global with no dead links.
-              </p>
+              <Link
+                href="/discover"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground hover:text-accent transition-colors pt-2 border-t border-border/60"
+              >
+                <span>Browse 30+ Awards</span>
+                <ArrowRight className="size-3 text-accent" />
+              </Link>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
-              <div className="flex items-center gap-2 text-foreground font-semibold">
-                <Sparkles className="size-4 text-accent shrink-0" />
-                <h3 className="font-heading text-base font-bold">2. Eligibility</h3>
+            <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-foreground font-semibold">
+                  <Sparkles className="size-4 text-accent shrink-0" />
+                  <h3 className="font-heading text-base font-bold">2. Understand Eligibility</h3>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Deterministic 5-factor fit score comparing your education level, discipline, country, and GPA with transparent met criteria.
+                </p>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Deterministic 5-factor fit score comparing your education level, discipline, country, and GPA with transparent met criteria.
-              </p>
+              <Link
+                href="/discover"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground hover:text-accent transition-colors pt-2 border-t border-border/60"
+              >
+                <span>Calculate Fit Score</span>
+                <ArrowRight className="size-3 text-accent" />
+              </Link>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
-              <div className="flex items-center gap-2 text-foreground font-semibold">
-                <FileCheck className="size-4 text-accent shrink-0" />
-                <h3 className="font-heading text-base font-bold">3. Navigate Steps</h3>
+            <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-foreground font-semibold">
+                  <FileCheck className="size-4 text-accent shrink-0" />
+                  <h3 className="font-heading text-base font-bold">3. Navigate Steps</h3>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Dedicated application timelines, document readiness checklists, and effort estimates for every single scholarship program.
+                </p>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Dedicated application timelines, document readiness checklists, and effort estimates for every single scholarship program.
-              </p>
+              <Link
+                href="/scholarships/reliance-foundation-future-tech-fellowship"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground hover:text-accent transition-colors pt-2 border-t border-border/60"
+              >
+                <span>View Sample Roadmap</span>
+                <ArrowRight className="size-3 text-accent" />
+              </Link>
             </div>
 
-            <div className="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-5">
-              <div className="flex items-center gap-2 text-foreground font-semibold">
-                <BookmarkCheck className="size-4 text-accent shrink-0" />
-                <h3 className="font-heading text-base font-bold">4. Track Deadlines</h3>
+            <div className="flex flex-col justify-between gap-3 rounded-2xl border border-border/60 bg-card p-5">
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2 text-foreground font-semibold">
+                  <BookmarkCheck className="size-4 text-accent shrink-0" />
+                  <h3 className="font-heading text-base font-bold">4. Track Deadlines</h3>
+                </div>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Local-first 4-column Kanban board with countdown alarms, checklist sync, and custom notes that persist securely in your browser.
+                </p>
               </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Local-first 4-column Kanban board with countdown alarms, checklist sync, and custom notes that persist securely in your browser.
-              </p>
+              <Link
+                href="/tracker"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-foreground hover:text-accent transition-colors pt-2 border-t border-border/60"
+              >
+                <span>Launch Kanban Board</span>
+                <ArrowRight className="size-3 text-accent" />
+              </Link>
             </div>
           </div>
         </div>

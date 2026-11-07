@@ -1,6 +1,8 @@
-# Grantly - Rethinking the Scholarship Experience
+# Grantly: Rethinking the Scholarship Experience
 
-Grantly is an accessible, privacy-first scholarship discovery and application tracking web application. Built as a fast, frontend-only system for students worldwide, Grantly eliminates account creation barriers, advertisements, and fragmented listings by pairing a comprehensive scholarship directory with client-side profile matching and persistent browser-local Kanban application tracking.
+> **Mission**: Make discovering and managing educational financial assistance simpler, more intuitive, and universally accessible.
+
+Grantly is an accessible, privacy-first scholarship discovery and application tracking web application. Built for the Outpost hackathon brief (*"Grantly: Rethinking the Scholarship Experience"*), Grantly eliminates account creation barriers, advertisements, and fragmented listings by pairing a comprehensive scholarship directory with client-side profile matching and persistent browser-local Kanban application tracking.
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.4.5-black?style=flat&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.3.0-blue?style=flat&logo=react)](https://react.dev/)

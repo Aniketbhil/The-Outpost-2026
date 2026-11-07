@@ -39,7 +39,9 @@ describe("Scholarship Filter & Sort Functions", () => {
     const { results } = filterAndSortScholarships(scholarships, { sort: "amount-high" });
     expect(results.length).toBeGreaterThan(1);
     // Since currency can vary, amounts in USD should be descending
-    expect(results[0].amount).toBeGreaterThan(0);
+    const first = results[0];
+    expect(first).toBeDefined();
+    expect(first?.amount).toBeGreaterThan(0);
   });
 
   it("returns empty results when filtering with impossible criteria", () => {

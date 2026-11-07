@@ -20,7 +20,11 @@ describe("TrackerBoard Component", () => {
     const loadDemoBtns = screen.getAllByRole("button", { name: /Load demo/i });
     expect(loadDemoBtns.length).toBeGreaterThan(0);
 
-    fireEvent.click(loadDemoBtns[0]);
+    const firstBtn = loadDemoBtns[0];
+    expect(firstBtn).toBeDefined();
+    if (firstBtn) {
+      fireEvent.click(firstBtn);
+    }
 
     // After loading demo data, summary row and columns appear
     expect(screen.getByText(/Total Tracked/i)).toBeInTheDocument();

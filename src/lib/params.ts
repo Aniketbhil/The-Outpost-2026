@@ -115,27 +115,33 @@ export function sanitizeSearchQuery(q: unknown): string {
  * Guarantees a fully typed, valid result with zero crashes.
  */
 export function parseSearchParams(
-  input: URLSearchParams | Record<string, string | string[] | undefined>
+  input: URLSearchParams | Record<string, unknown>
 ): ValidatedParams {
   const getParam = (key: string): string | null => {
     if (input instanceof URLSearchParams) {
       return input.get(key);
     }
     const val = input[key];
-    if (Array.isArray(val)) return val[0] ?? null;
+    if (Array.isArray(val)) {
+      const first = val[0];
+      return typeof first === "string" ? first : null;
+    }
     return typeof val === "string" ? val : null;
   };
 
   const getArrayParam = (key: string): string[] => {
     if (input instanceof URLSearchParams) {
       const all = input.getAll(key);
-      if (all.length === 1 && all[0].includes(",")) {
-        return all[0].split(",").map((s) => s.trim()).filter(Boolean);
+      const first = all[0];
+      if (all.length === 1 && first !== undefined && first.includes(",")) {
+        return first.split(",").map((s) => s.trim()).filter(Boolean);
       }
       return all.filter(Boolean);
     }
     const val = input[key];
-    if (Array.isArray(val)) return val.filter(Boolean);
+    if (Array.isArray(val)) {
+      return val.filter((item): item is string => typeof item === "string" && Boolean(item));
+    }
     if (typeof val === "string") {
       return val.includes(",")
         ? val.split(",").map((s) => s.trim()).filter(Boolean)

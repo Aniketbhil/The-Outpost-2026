@@ -27,6 +27,16 @@ const STATUS_LABELS: Record<TrackingStatus, string> = {
   closed: "Closed",
 };
 
+function isValidTrackingStatus(status: string): status is TrackingStatus {
+  return (
+    status === "saved" ||
+    status === "preparing" ||
+    status === "applied" ||
+    status === "awarded" ||
+    status === "closed"
+  );
+}
+
 export function DetailActions({
   scholarship,
   compact = false,
@@ -80,9 +90,9 @@ export function DetailActions({
     if (newStatus === "remove") {
       remove(scholarship.id);
       toast.info(`Removed "${scholarship.name}" from tracker.`);
-    } else {
-      setStatus(scholarship.id, newStatus as TrackingStatus);
-      toast.success(`Status updated to "${STATUS_LABELS[newStatus as TrackingStatus]}".`);
+    } else if (isValidTrackingStatus(newStatus)) {
+      setStatus(scholarship.id, newStatus);
+      toast.success(`Status updated to "${STATUS_LABELS[newStatus]}".`);
     }
   };
 

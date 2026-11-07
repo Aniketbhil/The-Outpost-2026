@@ -43,6 +43,16 @@ const STATUS_OPTIONS: { value: TrackingStatus; label: string }[] = [
   { value: "closed", label: "Closed / Inactive" },
 ];
 
+function isValidTrackingStatus(status: string): status is TrackingStatus {
+  return (
+    status === "saved" ||
+    status === "preparing" ||
+    status === "applied" ||
+    status === "awarded" ||
+    status === "closed"
+  );
+}
+
 export function TrackerCard({ item, scholarship }: TrackerCardProps) {
   const mounted = useIsMounted();
   const { setStatus, toggleDoc, setNotes, remove } = useTracker();
@@ -84,9 +94,11 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
   const isPast = daysLeft !== null && daysLeft < 0;
 
   const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const nextStatus = e.target.value as TrackingStatus;
-    setStatus(scholarship.id, nextStatus);
-    toast.success(`Moved "${scholarship.name}" to ${nextStatus}.`);
+    const nextStatus = e.target.value;
+    if (isValidTrackingStatus(nextStatus)) {
+      setStatus(scholarship.id, nextStatus);
+      toast.success(`Moved "${scholarship.name}" to ${nextStatus}.`);
+    }
   };
 
   const handleRemove = () => {

@@ -10,11 +10,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://grantly.app"),
   title: {
-    default: "Grantly — Scholarship Discovery & Application Tracker",
+    default: "Grantly: Rethinking the Scholarship Experience",
     template: "%s | Grantly",
   },
   description:
-    "Discover merit and need-based scholarships, calculate your personalized match score, and track your application deadlines locally.",
+    "Make discovering and managing educational financial assistance simpler, more intuitive, and accessible with verified awards, deterministic eligibility fit scoring, and local-first application tracking.",
   keywords: [
     "scholarships",
     "grants",
@@ -29,16 +29,16 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://grantly.app",
-    title: "Grantly — Scholarship Discovery & Application Tracker",
+    title: "Grantly: Rethinking the Scholarship Experience",
     description:
-      "Discover merit and need-based scholarships, calculate your personalized match score, and track your application deadlines locally.",
+      "Make discovering and managing educational financial assistance simpler, more intuitive, and accessible with verified awards, deterministic eligibility fit scoring, and local-first application tracking.",
     siteName: "Grantly",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Grantly — Scholarship Discovery & Application Tracker",
+    title: "Grantly: Rethinking the Scholarship Experience",
     description:
-      "Discover merit and need-based scholarships, calculate your personalized match score, and track your application deadlines locally.",
+      "Make discovering and managing educational financial assistance simpler, more intuitive, and accessible with verified awards, deterministic eligibility fit scoring, and local-first application tracking.",
   },
   icons: {
     icon: "/icon.svg",
