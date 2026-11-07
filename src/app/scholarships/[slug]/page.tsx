@@ -305,7 +305,7 @@ export default async function ScholarshipDetailPage({ params }: PageProps) {
               <div className="font-heading text-3xl xl:text-4xl font-bold tracking-tight text-foreground">
                 {formatCurrency(scholarship.amount, scholarship.currency)}
               </div>
-              <span className="text-xs font-semibold text-accent">
+              <span className="text-xs font-bold text-foreground">
                 {scholarship.coverage} &bull; {scholarship.type}
               </span>
             </div>

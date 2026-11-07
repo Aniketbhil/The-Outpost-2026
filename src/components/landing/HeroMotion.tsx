@@ -2,7 +2,8 @@
 
 import { m, LazyMotion, domAnimation } from "motion/react";
 import { HeroSearch } from "./HeroSearch";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function HeroMotion() {
   const containerVariants = {
@@ -37,16 +38,16 @@ export function HeroMotion() {
         >
           {/* Eyebrow badge */}
           <m.div variants={itemVariants}>
-            <div className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3.5 py-1 text-xs font-semibold text-foreground">
-              <Sparkles className="size-3.5 text-accent" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1 text-xs font-semibold text-foreground shadow-subtle">
+              <Sparkles className="size-3.5 text-accent" aria-hidden="true" />
               <span>Free &bull; Local-First &bull; No Sign-Up Needed</span>
             </div>
           </m.div>
 
-          {/* Fraunces Headline */}
+          {/* Sora Headline */}
           <m.h1
             variants={itemVariants}
-            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]"
+            className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.12]"
           >
             Find it<span className="text-accent">.</span> Fit it<span className="text-accent">.</span> Finish it<span className="text-accent">.</span>
           </m.h1>
@@ -65,115 +66,36 @@ export function HeroMotion() {
           </m.div>
         </m.div>
 
-        {/* Right Column: Tasteful SVG/CSS Accent Graphic */}
-        <div className="relative flex items-center justify-center lg:col-span-5" aria-hidden="true">
-          <div className="relative size-72 sm:size-88 lg:size-96">
-            {/* Ambient subtle glow ring */}
-            <div className="absolute inset-0 rounded-full border border-accent/20 bg-accent/5 backdrop-blur-3xl" />
-
-            {/* Concentric orbital SVG graphic */}
-            <svg
-              className="absolute inset-0 size-full"
-              viewBox="0 0 400 400"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              {/* Outer dashed ring */}
-              <circle
-                cx="200"
-                cy="200"
-                r="170"
-                stroke="currentColor"
-                className="text-border"
-                strokeWidth="1.5"
-                strokeDasharray="4 6"
-              />
-
-              {/* Middle boundary ring */}
-              <circle
-                cx="200"
-                cy="200"
-                r="120"
-                stroke="currentColor"
-                className="text-border"
-                strokeWidth="1.5"
-              />
-
-              {/* Inner focus circle */}
-              <circle
-                cx="200"
-                cy="200"
-                r="70"
-                stroke="currentColor"
-                className="text-accent/60"
-                strokeWidth="2"
-              />
-
-              {/* Crosshair guide marks */}
-              <line
-                x1="200"
-                y1="15"
-                x2="200"
-                y2="55"
-                stroke="currentColor"
-                className="text-accent"
-                strokeWidth="2"
-              />
-              <line
-                x1="200"
-                y1="345"
-                x2="200"
-                y2="385"
-                stroke="currentColor"
-                className="text-accent"
-                strokeWidth="2"
-              />
-              <line
-                x1="15"
-                y1="200"
-                x2="55"
-                y2="200"
-                stroke="currentColor"
-                className="text-accent"
-                strokeWidth="2"
-              />
-              <line
-                x1="345"
-                y1="200"
-                x2="385"
-                y2="200"
-                stroke="currentColor"
-                className="text-accent"
-                strokeWidth="2"
-              />
-
-              {/* Orbiting accent nodes */}
-              <circle cx="200" cy="80" r="6" className="fill-accent" />
-              <circle cx="305" cy="260" r="5" className="fill-accent opacity-75" />
-              <circle cx="95" cy="260" r="4" className="fill-accent opacity-60" />
-
-              {/* Central core node */}
-              <circle cx="200" cy="200" r="28" className="fill-card stroke-accent" strokeWidth="2" />
-              <circle cx="200" cy="200" r="10" className="fill-accent" />
-            </svg>
-
-            {/* Overlaid minimal metric chip */}
-            <div className="absolute -bottom-2 -left-2 sm:bottom-4 sm:left-4 rounded-xl border border-border bg-card/95 p-3.5 shadow-card backdrop-blur-md">
-              <div className="flex items-center gap-2.5">
-                <div className="size-2.5 rounded-full bg-accent animate-pulse" />
-                <div className="flex flex-col">
-                  <span className="text-xs font-medium text-muted-foreground">Match Engine</span>
-                  <span className="font-heading text-sm font-bold text-foreground">100% Client-Side</span>
-                </div>
+        {/* Right Column: Clean Editorial Preview Card */}
+        <div className="relative flex items-center justify-center lg:col-span-5">
+          <div className="relative w-full max-w-sm rounded-2xl border border-border bg-card p-6 shadow-card hover:-translate-y-0.5 transition-transform duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-border">
+              <div className="flex flex-col gap-0.5">
+                <span className="text-xs font-medium text-muted-foreground">Curated Fit</span>
+                <span className="font-heading text-base font-bold text-foreground">Global STEM Excellence</span>
               </div>
+              <span className="inline-flex items-center rounded bg-accent px-2 py-0.5 text-xs font-bold text-accent-foreground">
+                98% fit
+              </span>
             </div>
-
-            {/* Overlaid secondary metric chip */}
-            <div className="absolute -top-2 -right-2 sm:top-4 sm:right-4 rounded-xl border border-border bg-card/95 p-3.5 shadow-card backdrop-blur-md">
-              <div className="flex flex-col text-right">
-                <span className="text-xs font-medium text-muted-foreground">Applications</span>
-                <span className="font-heading text-sm font-bold text-foreground">Zero Deadlines Missed</span>
+            <div className="py-4 flex flex-col gap-2">
+              <span className="text-xs uppercase tracking-wider text-muted-foreground">Institutional Award</span>
+              <div className="font-heading text-3xl font-bold tracking-tight text-foreground tabular-nums">
+                $45,000
               </div>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Full tuition plus annual research stipend for undergraduate engineering &amp; computing scholars.
+              </p>
+            </div>
+            <div className="flex items-center justify-between pt-3 border-t border-border text-xs text-muted-foreground">
+              <span>Deadline: Dec 15, 2026</span>
+              <Link
+                href="/discover"
+                className="inline-flex items-center gap-1 font-semibold text-foreground hover:text-accent transition-colors"
+              >
+                <span>Browse Directory</span>
+                <ArrowRight className="size-3 text-accent" aria-hidden="true" />
+              </Link>
             </div>
           </div>
         </div>

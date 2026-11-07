@@ -10,16 +10,18 @@ export function DeadlineBadge({ deadline }: { deadline: string }) {
 
   return (
     <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-      <Clock className="size-3.5 text-accent shrink-0" />
+      <Clock className="size-3.5 text-accent shrink-0" aria-hidden="true" />
       <span>{formatDate(deadline, { month: "short", day: "numeric" })}</span>
       {days !== null ? (
-        <span
-          className={`font-semibold ${
-            days <= 30 ? "text-accent" : "text-muted-foreground"
-          }`}
-        >
-          &bull; {days < 0 ? "Expired" : days === 0 ? "Today" : `${days}d left`}
-        </span>
+        days <= 14 && days >= 0 ? (
+          <span className="inline-flex items-center rounded bg-accent px-1.5 py-0.5 text-xs font-bold text-accent-foreground">
+            {days === 0 ? "Due today" : `${days}d left`}
+          </span>
+        ) : (
+          <span className="font-semibold text-foreground">
+            &bull; {days < 0 ? "Closed" : `${days}d left`}
+          </span>
+        )
       ) : null}
     </div>
   );

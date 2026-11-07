@@ -78,7 +78,7 @@ export function DetailEligibility({ scholarship }: DetailEligibilityProps) {
             <button
               type="button"
               onClick={() => setWizardOpen(true)}
-              className="text-xs font-semibold text-accent hover:underline"
+              className="text-xs font-bold text-foreground hover:text-accent underline transition-colors"
             >
               Update Profile
             </button>

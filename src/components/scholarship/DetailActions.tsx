@@ -4,6 +4,7 @@ import * as React from "react";
 import { useTracker } from "@/hooks/use-tracker";
 import { useIsMounted } from "@/hooks/use-is-mounted";
 import type { Scholarship, TrackingStatus } from "@/lib/types";
+import { isValidApplyUrl } from "@/lib/params";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import {
@@ -42,8 +43,13 @@ export function DetailActions({
   };
 
   const handleStartApplication = () => {
-    // Open application url
-    window.open(scholarship.applyUrl, "_blank", "noopener,noreferrer");
+    // Validate apply URL protocol (strictly http / https)
+    const validUrl = isValidApplyUrl(scholarship.applyUrl);
+    if (validUrl) {
+      window.open(scholarship.applyUrl, "_blank", "noopener,noreferrer");
+    } else {
+      toast.info("Demonstration catalog program — external application portal simulated locally.");
+    }
 
     const previousStatus = trackedItem ? trackedItem.status : null;
 

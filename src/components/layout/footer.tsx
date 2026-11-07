@@ -22,13 +22,13 @@ export function Footer() {
         <nav className="flex items-center gap-6 text-sm text-muted-foreground" aria-label="Footer Navigation">
           <Link
             href="/"
-            className="transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
             Discover
           </Link>
           <Link
             href="/tracker"
-            className="transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-[44px] items-center transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
             My Tracker
           </Link>

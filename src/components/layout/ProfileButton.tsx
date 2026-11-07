@@ -28,7 +28,7 @@ export function ProfileButton() {
         variant="outline"
         onClick={() => setOpen(true)}
         className="min-h-[44px] gap-2 rounded-lg border-border bg-background px-3 text-xs font-semibold text-foreground hover:bg-muted focus-visible:ring-ring"
-        aria-label="Open profile match settings"
+        aria-label={hasProfile ? "My Profile - update matching criteria" : "Match Profile - set up your criteria"}
       >
         <Sparkles className="size-4 text-accent" />
         <span className="hidden sm:inline">

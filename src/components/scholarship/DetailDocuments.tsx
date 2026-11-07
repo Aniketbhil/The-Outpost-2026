@@ -57,7 +57,11 @@ export function DetailDocuments({ scholarship }: DetailDocumentsProps) {
               {completedCount} of {totalCount} ready ({progressPercent}%)
             </span>
           </div>
-          <Progress value={progressPercent} className="h-2 bg-muted" />
+          <Progress
+            value={progressPercent}
+            className="h-2 bg-muted"
+            aria-label="Application document readiness"
+          />
           {progressPercent === 100 ? (
             <span className="text-xs font-medium text-foreground flex items-center gap-1 pt-0.5">
               <CheckCircle2 className="size-3.5 text-accent" />

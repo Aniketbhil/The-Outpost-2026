@@ -168,8 +168,8 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
                 <span>Closed</span>
               </span>
             ) : isUrgent ? (
-              <span className="inline-flex items-center gap-1 rounded border border-accent/40 bg-accent/15 px-1.5 py-0.5 text-xs font-bold text-foreground">
-                <AlertCircle className="size-3 text-accent" />
+              <span className="inline-flex items-center gap-1 rounded bg-accent px-2 py-0.5 text-xs font-bold text-accent-foreground">
+                <AlertCircle className="size-3 text-accent-foreground" aria-hidden="true" />
                 <span>
                   {daysLeft === 0 ? "Due today!" : `Due in ${daysLeft} days`}
                 </span>
@@ -191,7 +191,7 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
               <button
                 type="button"
                 onClick={() => setChecklistExpanded((prev) => !prev)}
-                className="flex items-center gap-1 text-xs text-accent hover:underline"
+                className="flex items-center gap-1 text-xs font-semibold text-foreground hover:text-accent hover:underline"
               >
                 <span>
                   {completedDocsCount}/{totalDocsCount} ({docsProgress}%)
@@ -204,7 +204,11 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
               </button>
             </div>
 
-            <Progress value={docsProgress} className="h-1.5 bg-muted" />
+            <Progress
+              value={docsProgress}
+              className="h-1.5 bg-muted"
+              aria-label="Document completion progress"
+            />
 
             {checklistExpanded ? (
               <div className="flex flex-col gap-2 pt-2 border-t border-border mt-1">
@@ -258,13 +262,13 @@ export function TrackerCard({ item, scholarship }: TrackerCardProps) {
             Full Details
           </Link>
           <a
-            href={scholarship.applyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-semibold text-accent hover:underline"
+            href={scholarship.applyUrl.startsWith("http") ? scholarship.applyUrl : "#"}
+            target={scholarship.applyUrl.startsWith("http") ? "_blank" : undefined}
+            rel={scholarship.applyUrl.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="inline-flex items-center gap-1 font-semibold text-foreground hover:text-accent hover:underline"
           >
             <span>Official Portal</span>
-            <ExternalLink className="size-3" />
+            <ExternalLink className="size-3 text-accent" aria-hidden="true" />
           </a>
         </div>
       </div>

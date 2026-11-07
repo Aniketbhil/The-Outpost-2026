@@ -81,6 +81,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 className={`relative inline-flex min-h-[44px] items-center gap-2 rounded-md px-3.5 py-2 text-sm font-medium transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring ${
                   isActive
                     ? "font-semibold text-foreground"
@@ -140,6 +141,7 @@ export function Header() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
                       className={`flex min-h-[48px] items-center justify-between rounded-lg px-3.5 py-2.5 text-base font-medium transition-colors ${
                         isActive
                           ? "bg-muted font-semibold text-foreground border border-border"

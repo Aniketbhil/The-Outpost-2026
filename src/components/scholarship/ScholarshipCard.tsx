@@ -10,8 +10,8 @@ import { Globe, ArrowRight } from "lucide-react";
 
 export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
   return (
-    <Card className="group flex h-full flex-col justify-between border-border bg-card transition-all duration-200 hover:border-accent/40 hover:shadow-card">
-      <CardHeader className="flex flex-col gap-3 p-5 sm:p-6">
+    <Card className="group flex h-full flex-col justify-between border-border bg-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card focus-within:border-accent">
+      <CardHeader className="flex flex-col gap-3 p-5 sm:p-6 min-w-0">
         {/* Top bar: Provider, country, and Save button */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex flex-col gap-1">
@@ -42,9 +42,9 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
         {/* Scholarship Name */}
         <Link
           href={`/scholarships/${scholarship.slug}`}
-          className="group-hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm"
+          className="group-hover:text-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm min-w-0"
         >
-          <h3 className="font-heading text-lg sm:text-xl font-bold leading-snug text-foreground">
+          <h3 className="font-heading text-lg sm:text-xl font-bold leading-snug text-foreground break-words text-balance">
             {scholarship.name}
           </h3>
         </Link>
@@ -100,7 +100,7 @@ export function ScholarshipCard({ scholarship }: { scholarship: Scholarship }) {
         </div>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between border-t border-border px-5 py-3.5 sm:px-6">
+      <CardFooter className="flex flex-wrap items-center justify-between gap-2 border-t border-border px-5 py-3.5 sm:px-6">
         <DeadlineBadge deadline={scholarship.deadline} />
 
         <Link

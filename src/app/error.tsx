@@ -24,7 +24,7 @@ export default function ErrorBoundary({
       </div>
 
       <div className="flex flex-col gap-2">
-        <span className="text-xs font-bold uppercase tracking-wider text-accent">
+        <span className="text-xs font-bold uppercase tracking-wider text-foreground">
           Application Notice
         </span>
         <h1 className="font-heading text-3xl font-bold tracking-tight text-foreground">

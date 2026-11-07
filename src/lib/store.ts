@@ -59,33 +59,31 @@ export const DEMO_TRACKED_ITEMS: Record<string, TrackedItem> = {
     scholarshipId: "sch-4",
     status: "awarded",
     checklist: {
-      "Acceptance Agreement": true,
-      "Direct Deposit Verification": true,
+      "Financial Assessment": true,
+      "Proof of Enrollment": true,
+      "Academic Reference": true,
     },
-    notes: "Award confirmation received! Disbursed directly to university account.",
-    addedAt: "2026-09-01T12:00:00.000Z",
-    updatedAt: "2026-10-28T11:00:00.000Z",
+    notes: "Award notification received! Disbursement scheduled for Spring 2027.",
+    addedAt: "2026-09-10T11:00:00.000Z",
+    updatedAt: "2026-10-28T10:00:00.000Z",
   },
   "sch-5": {
     scholarshipId: "sch-5",
-    status: "preparing",
+    status: "closed",
     checklist: {
-      "High School and College Transcripts": true,
-      "FAFSA / Student Aid Index (SAI) documentation": true,
-      "Two Personal Insight Essays (500 words each)": false,
-      "One Academic STEM Teacher Recommendation": false,
-      "One Community or Leadership Reference": true,
+      "Research Proposal": true,
+      "Faculty Letter": true,
     },
-    notes: "Drafting the personal insight essays. Advisor recommended emphasizing first-generation STEM background.",
-    addedAt: "2026-10-20T11:00:00.000Z",
-    updatedAt: "2026-11-04T09:30:00.000Z",
+    notes: "Deadline passed for the 2026 cohort. Target for next cycle.",
+    addedAt: "2026-08-01T09:00:00.000Z",
+    updatedAt: "2026-09-15T12:00:00.000Z",
   },
 };
 
 export const DEFAULT_STATE: TrackerStoreState = {
   version: 1,
   profile: DEFAULT_PROFILE,
-  tracked: {},
+  tracked: DEMO_TRACKED_ITEMS,
 };
 
 export const DEFAULT_FILTERS: ScholarshipFilters = {
@@ -102,6 +100,59 @@ export const DEFAULT_FILTERS: ScholarshipFilters = {
   sortBy: "deadline-soonest",
 };
 
+export const VALID_STATUSES: readonly TrackingStatus[] = [
+  "saved",
+  "preparing",
+  "applied",
+  "awarded",
+  "closed",
+];
+
+export function isValidTrackedItem(item: unknown): item is TrackedItem {
+  if (!item || typeof item !== "object") return false;
+  const o = item as Record<string, unknown>;
+  return (
+    typeof o.scholarshipId === "string" &&
+    typeof o.status === "string" &&
+    VALID_STATUSES.includes(o.status as TrackingStatus) &&
+    typeof o.checklist === "object" &&
+    o.checklist !== null &&
+    typeof o.notes === "string"
+  );
+}
+
+export function isValidProfile(profile: unknown): profile is UserProfile {
+  if (!profile || typeof profile !== "object") return false;
+  const p = profile as Record<string, unknown>;
+  return (
+    typeof p.educationLevel === "string" &&
+    typeof p.fieldOfStudy === "string" &&
+    typeof p.country === "string" &&
+    typeof p.gpa === "string" &&
+    typeof p.financialNeed === "boolean"
+  );
+}
+
+export function isValidStoreState(state: unknown): state is TrackerStoreState {
+  if (!state || typeof state !== "object") return false;
+  const s = state as Record<string, unknown>;
+  if (s.version !== 1 || !s.tracked || typeof s.tracked !== "object") {
+    return false;
+  }
+
+  for (const [id, item] of Object.entries(s.tracked as Record<string, unknown>)) {
+    if (typeof id !== "string" || !isValidTrackedItem(item)) {
+      return false;
+    }
+  }
+
+  if (s.profile && !isValidProfile(s.profile)) {
+    return false;
+  }
+
+  return true;
+}
+
 let currentState: TrackerStoreState = DEFAULT_STATE;
 let initialized = false;
 const listeners = new Set<() => void>();
@@ -114,12 +165,19 @@ function getStorageState(): TrackerStoreState {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULT_STATE;
     const parsed = JSON.parse(raw);
-    if (parsed && typeof parsed === "object" && parsed.version === 1) {
-      return parsed as TrackerStoreState;
+    if (isValidStoreState(parsed)) {
+      return parsed;
     }
+    // Corrupted state or version mismatch: clear storage and return default
+    window.localStorage.removeItem(STORAGE_KEY);
     return DEFAULT_STATE;
-  } catch (error) {
-    console.warn("Grantly: Failed to read from localStorage", error);
+  } catch {
+    // Handled safely if localStorage is restricted (private browsing / quota exceeded)
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // In-memory fallback
+    }
     return DEFAULT_STATE;
   }
 }
@@ -128,8 +186,8 @@ function persistState(state: TrackerStoreState) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch (error) {
-    console.error("Grantly: Failed to save to localStorage", error);
+  } catch {
+    // Graceful in-memory operation if quota exceeded or storage disabled
   }
 }
 
@@ -243,6 +301,8 @@ export const store = {
     setState((prev) => {
       const existing = prev.tracked[scholarshipId];
       if (!existing) return prev;
+
+      const currentChecked = Boolean(existing.checklist[docName]);
       return {
         ...prev,
         tracked: {
@@ -251,7 +311,7 @@ export const store = {
             ...existing,
             checklist: {
               ...existing.checklist,
-              [docName]: !existing.checklist[docName],
+              [docName]: !currentChecked,
             },
             updatedAt: now,
           },
@@ -262,16 +322,19 @@ export const store = {
 
   setNotes(scholarshipId: string, notes: string) {
     const now = new Date().toISOString();
+    // Safety: limit notes length to 5000 characters and ensure string type
+    const sanitizedNotes = typeof notes === "string" ? notes.slice(0, 5000) : "";
     setState((prev) => {
       const existing = prev.tracked[scholarshipId];
       if (!existing) return prev;
+
       return {
         ...prev,
         tracked: {
           ...prev.tracked,
           [scholarshipId]: {
             ...existing,
-            notes,
+            notes: sanitizedNotes,
             updatedAt: now,
           },
         },
@@ -279,6 +342,37 @@ export const store = {
     });
   },
 
+  // Profile Actions
+  updateProfile(profile: Partial<UserProfile>) {
+    setState((prev) => ({
+      ...prev,
+      profile: {
+        ...prev.profile,
+        ...profile,
+      },
+    }));
+  },
+
+  clearProfile() {
+    setState((prev) => ({
+      ...prev,
+      profile: {
+        name: "",
+        educationLevel: "",
+        fieldOfStudy: "",
+        country: "",
+        gpa: "",
+        financialNeed: false,
+        interests: [],
+      },
+    }));
+  },
+
+  resetProfile() {
+    this.clearProfile();
+  },
+
+  // Bulk Operations
   loadDemo() {
     setState((prev) => ({
       ...prev,
@@ -292,32 +386,4 @@ export const store = {
       tracked: {},
     }));
   },
-
-  // Profile Actions
-  updateProfile(patch: Partial<UserProfile>) {
-    setState((prev) => ({
-      ...prev,
-      profile: {
-        ...prev.profile,
-        ...patch,
-      },
-    }));
-  },
-
-  resetProfile() {
-    setState((prev) => ({
-      ...prev,
-      profile: DEFAULT_PROFILE,
-    }));
-  },
 };
-
-// Cross-tab synchronization
-if (typeof window !== "undefined") {
-  window.addEventListener("storage", (event) => {
-    if (event.key === STORAGE_KEY) {
-      currentState = getStorageState();
-      notify();
-    }
-  });
-}

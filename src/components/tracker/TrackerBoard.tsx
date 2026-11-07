@@ -300,9 +300,15 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
               >
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs uppercase font-bold text-accent tracking-wide">
-                      {days < 0 ? "Expired" : days === 0 ? "Due Today" : `Due in ${days} days`}
-                    </span>
+                    {days <= 14 && days >= 0 ? (
+                      <span className="inline-flex items-center rounded bg-accent px-1.5 py-0.5 text-xs font-bold text-accent-foreground">
+                        {days === 0 ? "Due Today" : `Due in ${days}d`}
+                      </span>
+                    ) : (
+                      <span className="text-xs font-bold text-foreground tracking-wide">
+                        {days < 0 ? "Closed" : `Due in ${days} days`}
+                      </span>
+                    )}
                     <span className="text-xs text-muted-foreground font-mono">
                       {formatDate(scholarship.deadline, { month: "short", day: "numeric" })}
                     </span>
@@ -316,7 +322,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                   <span className="font-semibold text-foreground">
                     {formatCurrency(scholarship.amount, scholarship.currency)}
                   </span>
-                  <span className="capitalize text-accent font-medium">
+                  <span className="capitalize text-foreground font-semibold">
                     {item.status}
                   </span>
                 </div>
@@ -396,7 +402,7 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
           {/* Mobile Tabs View */}
           <div className="lg:hidden flex flex-col gap-4">
             <Tabs defaultValue="saved" className="w-full">
-              <TabsList className="grid grid-cols-4 w-full h-auto p-1 bg-muted/60 border border-border">
+              <TabsList className="flex sm:grid sm:grid-cols-4 w-full overflow-x-auto h-auto p-1 bg-muted/60 border border-border">
                 {COLUMNS.map((col) => {
                   const colCount = trackedList.filter((item) =>
                     col.statuses.includes(item.status)
@@ -406,11 +412,11 @@ export function TrackerBoard({ scholarships }: TrackerBoardProps) {
                     <TabsTrigger
                       key={col.id}
                       value={col.id}
-                      className="py-2.5 text-xs font-semibold data-[state=active]:bg-card data-[state=active]:text-foreground"
+                      className="flex-1 min-w-[68px] py-2 sm:py-2.5 text-xs font-semibold data-[state=active]:bg-card data-[state=active]:text-foreground"
                     >
                       <div className="flex flex-col items-center gap-0.5">
                         <span>{col.label}</span>
-                        <span className="text-xs font-bold text-accent">
+                        <span className="text-xs font-bold text-foreground opacity-80">
                           ({colCount})
                         </span>
                       </div>

@@ -130,7 +130,11 @@ function ProfileWizardForm({
           {step === 4 && "Tunes cutoffs and highlights need-based versus merit-based funding options."}
         </DialogDescription>
 
-        <Progress value={progressPercent} className="mt-2 h-1.5 bg-muted" />
+        <Progress
+          value={progressPercent}
+          className="mt-2 h-1.5 bg-muted"
+          aria-label="Profile setup step progress"
+        />
       </DialogHeader>
 
       {/* Step 1: Education Level */}
@@ -348,7 +352,7 @@ export function ProfileWizardDialog({
 }: ProfileWizardDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl border-border bg-card p-6 sm:p-8">
+      <DialogContent className="sm:max-w-xl border-border bg-card p-6 sm:p-8 max-h-[90dvh] overflow-y-auto">
         {open ? (
           <ProfileWizardForm
             onClose={() => onOpenChange(false)}

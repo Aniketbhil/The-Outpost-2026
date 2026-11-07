@@ -28,6 +28,8 @@ export type StudyField =
   | "Social Sciences"
   | "Any";
 
+export type FieldOfStudy = StudyField;
+
 export type ScholarshipType =
   | "Merit"
   | "Need-based"

@@ -122,7 +122,7 @@ export function StatStrip({
                 {stat.label}
               </span>
             </div>
-            <div className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
+            <div className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground tabular-nums break-words">
               {stat.value}
             </div>
             <p className="text-xs text-muted-foreground">{stat.subtext}</p>

@@ -57,9 +57,11 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-20 py-8 sm:gap-28 sm:py-12 lg:py-16">
-      {/* 1. Hero Section */}
-      <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <HeroMotion />
+      {/* 1. Hero Section with subtle paper-like accent gradient */}
+      <section className="relative overflow-hidden pt-4 pb-8 sm:pb-12 bg-[radial-gradient(ellipse_at_top,_color-mix(in_srgb,var(--accent)_6%,var(--background))_0%,var(--background)_70%)]">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <HeroMotion />
+        </div>
       </section>
 
       {/* 2. Stat Strip Section */}
@@ -105,8 +107,8 @@ export default function HomePage() {
       >
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
           <div className="flex flex-col gap-2">
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
-              <Clock className="size-3.5" />
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-foreground">
+              <Clock className="size-3.5 text-accent" aria-hidden="true" />
               <span>Upcoming Deadlines</span>
             </div>
             <h2
@@ -152,8 +154,8 @@ export default function HomePage() {
       >
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
           <div className="flex flex-col gap-2">
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-accent">
-              <Sparkles className="size-3.5" />
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-foreground">
+              <Sparkles className="size-3.5 text-accent" aria-hidden="true" />
               <span>High Impact Awards</span>
             </div>
             <h2
@@ -234,8 +236,8 @@ export default function HomePage() {
               {/* Solution Column */}
               <div className="flex flex-col gap-2 p-6 sm:p-8 bg-muted/20">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="size-4 text-accent" />
-                  <span className="text-xs uppercase tracking-wider text-accent font-semibold">
+                  <CheckCircle2 className="size-4 text-accent" aria-hidden="true" />
+                  <span className="text-xs uppercase tracking-wider text-foreground font-bold">
                     How Grantly Fixes It
                   </span>
                 </div>
@@ -274,7 +276,7 @@ export default function HomePage() {
       {/* 8. Final CTA Band (Accent Fill) */}
       <section className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-3xl bg-accent p-8 sm:p-14 text-center text-accent-foreground shadow-card flex flex-col items-center gap-6">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent-foreground/20 bg-accent-foreground/10 px-3.5 py-1 text-xs font-semibold text-accent-foreground">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-accent-foreground/30 bg-transparent px-3.5 py-1 text-xs font-semibold text-accent-foreground">
             <BookmarkCheck className="size-4" />
             <span>Ready for your next application cycle</span>
           </div>
@@ -283,7 +285,7 @@ export default function HomePage() {
             Start discovering scholarships tailored to your exact profile.
           </h2>
 
-          <p className="text-base sm:text-lg text-accent-foreground/90 max-w-xl leading-relaxed">
+          <p className="text-base sm:text-lg text-accent-foreground max-w-xl leading-relaxed">
             No signup barriers, no advertisements. Save opportunities, check off your application requirements, and never miss a deadline.
           </p>
 

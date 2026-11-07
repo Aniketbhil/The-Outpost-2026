@@ -100,8 +100,8 @@ export function TopMatchesStrip({
               <span className="text-xs font-bold text-foreground">
                 {formatCurrency(scholarship.amount, scholarship.currency)}
               </span>
-              <span className="inline-flex items-center text-xs font-semibold text-accent gap-0.5 group-hover:translate-x-0.5 transition-transform">
-                View <ArrowRight className="size-3" />
+              <span className="inline-flex items-center text-xs font-bold text-foreground group-hover:text-accent gap-0.5 transition-colors">
+                View <ArrowRight className="size-3 text-accent group-hover:translate-x-0.5 transition-transform" />
               </span>
             </div>
           </Link>

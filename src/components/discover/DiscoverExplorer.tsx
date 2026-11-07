@@ -356,6 +356,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
           min={0}
           max={50000}
           step={2500}
+          aria-label="Minimum funding in USD"
           onValueChange={(vals) => {
             const v = Array.isArray(vals) ? vals[0] : vals;
             updateParams({ minAmount: v && v > 0 ? String(v) : null });
@@ -432,7 +433,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
               <button
                 type="button"
                 onClick={handleClearAll}
-                className="text-xs font-medium text-accent hover:underline"
+                className="text-xs font-semibold text-foreground underline hover:text-accent"
               >
                 Clear all ({activeFiltersCount})
               </button>
@@ -485,7 +486,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
                   </SheetTrigger>
                   <SheetContent
                     side="bottom"
-                    className="h-[85vh] rounded-t-2xl border-t border-border bg-card p-6 overflow-y-auto"
+                    className="max-h-[90dvh] h-[85dvh] rounded-t-2xl border-t border-border bg-card p-6 overflow-y-auto"
                   >
                     <SheetHeader className="text-left border-b border-border pb-4">
                       <div className="flex items-center justify-between">
@@ -496,7 +497,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
                           <button
                             type="button"
                             onClick={handleClearAll}
-                            className="text-xs font-semibold text-accent"
+                            className="text-xs font-semibold text-foreground underline hover:text-accent"
                           >
                             Reset All
                           </button>
@@ -667,7 +668,7 @@ export function DiscoverExplorer({ scholarships }: DiscoverExplorerProps) {
                 <button
                   type="button"
                   onClick={handleClearAll}
-                  className="text-xs font-semibold text-accent hover:underline ml-1"
+                  className="text-xs font-semibold text-foreground underline hover:text-accent ml-1"
                 >
                   Clear all
                 </button>
