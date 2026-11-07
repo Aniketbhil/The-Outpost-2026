@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, Sparkles, BookmarkCheck } from "lucide-react";
 import { useTracker } from "@/hooks/use-tracker";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { ProfileButton } from "./ProfileButton";
 import { Badge } from "@/components/ui/badge";
 import {
   Sheet,
@@ -108,11 +109,13 @@ export function Header() {
 
         {/* Desktop Actions */}
         <div className="hidden items-center gap-2 md:flex">
+          <ProfileButton />
           <ThemeToggle />
         </div>
 
         {/* Mobile Navigation via Sheet */}
         <div className="flex items-center gap-2 md:hidden">
+          <ProfileButton />
           <ThemeToggle />
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger
